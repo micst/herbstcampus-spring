@@ -18,22 +18,37 @@ import static org.junit.Assert.assertEquals;
 
 // Ergänzen um Annotationen, die Spring-Support aktivieren und den Context konfigurieren (Achtung: SpringBoot!)
 // Zusätzlich benötigen wir einen laufenden Container - Annotation für Integrationstests hinzufügen
+@RunWith(SpringRunner.class)
+@SpringBootTest
 public class RestEndpointsTest {
     
 	@Test
 	public void testWithSpringRestTemplate() {
+
+	    User user = generateSampleUser();
+
 	    // Given
-	    
+        given()
+            .contentType(ContentType.JSON)
+            .body(user)
 	    // When
-	    
+        .when()
+            .post("http://localhost:8080/api/produkt.json")
 	    // Then
+        .then()
+            .statusCode(HttpStatus.SC_OK)
+            .contentType(ContentType.JSON)
+            .assertThat()
+            .equals(generateSampleProdukt((user)));
 
 	}
-	
+
+	/*
 	@Test
     public void testWithRestAssured() {
 		
     }
+    */
 	
 	
 	

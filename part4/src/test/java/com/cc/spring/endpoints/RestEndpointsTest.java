@@ -39,7 +39,7 @@ public class RestEndpointsTest {
             .statusCode(HttpStatus.SC_OK)
             .contentType(ContentType.JSON)
             .assertThat()
-            .equals(generateSampleProdukt((user)));
+                .equals(generateSampleProdukt((user)));
 
 	}
 
